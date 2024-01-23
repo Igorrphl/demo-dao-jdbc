@@ -1,10 +1,13 @@
 package model.dao.impl;
 
-import java.sql.Connection; 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import db.DB;
 import db.DbException;
@@ -92,6 +95,53 @@ public class SellerDaoJDBC implements SellerDao {
 	public List<Seller> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Seller> findByDepartament(Departament departament) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT seller.*,department.Name as DepName "
+					+ "FROM seller INNER JOIN department "
+					+ "ON seller.DepartmentId = department.Id "
+					+ "WHERE DepartmentId = ? "
+					+ "ORDER BY Name ");
+			
+			st.setInt(1, departament.getId());
+			rs = st.executeQuery();
+			List<Seller> list = new ArrayList<Seller>();
+			
+			//Map foi criado para guardar qualquer departamento que eu criar
+			Map<Integer, Departament> map = new HashMap<>();
+			
+			//Usando o While pois pode ter nenhum ou vários departamentos
+			//Então cada vez que passa pelo While eu testo para confirmar se o departamento já existe
+			while (rs.next()) {
+				
+				//Testando se o departamento já existe - 
+				Departament dep = map.get(rs.getInt("DepartmentId"));
+				
+				//teste se o dep for igual a nulo - Ele não existia e eu instacio ele 
+				if ( dep == null) {
+					 dep = instatieteDepartment(rs);
+					 //Salvando dentro do MAP
+					 map.put(rs.getInt("DepartmentId"), dep);
+
+				}
+				Seller obj = instatieteSeller(rs, dep);
+				list.add(obj); 
+			}
+			return list;			
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 }
