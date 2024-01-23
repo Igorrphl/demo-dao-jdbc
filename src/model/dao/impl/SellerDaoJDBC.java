@@ -52,20 +52,13 @@ public class SellerDaoJDBC implements SellerDao {
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if (rs.next()) {
-				Departament dep = new Departament();
-				dep.setId(rs.getInt("DepartmentId"));
-				dep.setName(rs.getString("DepName"));
-				Seller obj = new Seller();
-				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				obj.setEmail(rs.getString("Email"));
-				obj.setDate(rs.getDate("BirthDate"));
-				obj.setSalary(rs.getDouble("BaseSalary"));
-				obj.setDepartament(dep);
+				//Chamada de função
+				Departament dep = instatieteDepartment(rs);
+				Seller obj = instatieteSeller(rs, dep);
 				return obj;
 			}
 			return null;
-		}
+		} 
 		catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		}
@@ -74,6 +67,25 @@ public class SellerDaoJDBC implements SellerDao {
 			DB.closeResultSet(rs);
 		}
 		
+	}
+
+	private Seller instatieteSeller(ResultSet rs, Departament dep) throws SQLException {
+		Seller obj = new Seller();
+		obj.setId(rs.getInt("Id"));
+		obj.setName(rs.getString("Name"));
+		obj.setEmail(rs.getString("Email"));
+		obj.setDate(rs.getDate("BirthDate"));
+		obj.setSalary(rs.getDouble("BaseSalary"));
+		obj.setDepartament(dep);
+		return obj;
+	}
+
+	//Transformando em Função 
+	private Departament instatieteDepartment(ResultSet rs) throws SQLException {
+		Departament dep = new Departament();
+		dep.setId(rs.getInt("DepartmentId"));
+		dep.setName(rs.getString("DepName"));
+		return dep;
 	}
 
 	@Override
