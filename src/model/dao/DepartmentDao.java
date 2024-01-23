@@ -8,7 +8,7 @@ public interface DepartmentDao {
 
 	void insert(Departament obj);
 	void update(Departament obj);
-	void deleByIde(Integer id);
+	void deleById(Integer id);
 	//responsável por verificar se existe aquele ID no BD
 	Departament findById(Integer id);
 	List<Departament> findAll();

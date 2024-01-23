@@ -5,7 +5,8 @@ import java.util.Objects;
 
 public class Departament implements Serializable {
 	
-	//TRANSFORMANDO OBEJTOS EM SEQUÊNCIA DE BYTES - IMPLEMENTS SERIALIZABLE
+	//TRANSFORMANDO OBEJTOS EM SEQUÊNCIA DE BYTES - IMPLEMENTS SERIALIZABLE 
+	//Isso para que o obj seja gravado em arquivo e trafegado em rede
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
@@ -33,7 +34,7 @@ public class Departament implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

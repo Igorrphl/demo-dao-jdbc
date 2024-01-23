@@ -8,7 +8,7 @@ public interface SellerDao {
 	
 	void insert(Seller obj);
 	void update(Seller obj);
-	void deleByIde(Integer id);
+	void deleById(Integer id);
 	//responsável por verificar se existe aquele ID no BD
 	Seller findById(Integer id);
 	List<Seller> findAll();
