@@ -31,10 +31,20 @@ public class Program {
 			System.out.println(obj);
 		}
 		
-		System.out.println("\n=== Test 3: Seller Insert ===");
+		/*System.out.println("\n=== Test 4: Seller Insert ===");
 		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.0, departament);
 		sellerDao.insert(newSeller);
 		System.out.println("Inserte! New id = " + newSeller.getId());
+		*/
+	
+		System.out.println("\n=== Test 4: Seller Insert ===");
+		//Procurando vendedor de Id = 1
+		seller = sellerDao.findById(2);
+		//Dando novo nome para o vendedor
+		seller.setName("Marta");
+		sellerDao.update(seller);
+		System.out.println("Atualização feita!");
+	
 	}
-
+	
 }
