@@ -37,7 +37,7 @@ public class Program {
 		System.out.println("Inserte! New id = " + newSeller.getId());
 		*/
 	
-		System.out.println("\n=== Test 4: Seller Insert ===");
+		System.out.println("\n=== Test 5: Seller Insert ===");
 		//Procurando vendedor de Id = 1
 		seller = sellerDao.findById(2);
 		//Dando novo nome para o vendedor
@@ -45,6 +45,9 @@ public class Program {
 		sellerDao.update(seller);
 		System.out.println("Atualização feita!");
 	
+		System.out.println("\n==== Teste 6: Seller Delete ===");
+		sellerDao.deleById(5);
+		System.out.println("Usuário Excluido com sucesso!");
 	}
 	
 }
