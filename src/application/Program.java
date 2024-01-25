@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
+import model.dao.DepartmentDao;
 import model.dao.SellerDao;
 import model.entities.Departament;
 import model.entities.Seller;
@@ -31,11 +32,10 @@ public class Program {
 			System.out.println(obj);
 		}
 		
-		/*System.out.println("\n=== Test 4: Seller Insert ===");
+		System.out.println("\n=== Test 4: Seller Insert ===");
 		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.0, departament);
 		sellerDao.insert(newSeller);
 		System.out.println("Inserte! New id = " + newSeller.getId());
-		*/
 	
 		System.out.println("\n=== Test 5: Seller Insert ===");
 		//Procurando vendedor de Id = 1
@@ -48,6 +48,10 @@ public class Program {
 		System.out.println("\n==== Teste 6: Seller Delete ===");
 		sellerDao.deleById(5);
 		System.out.println("Usuário Excluido com sucesso!");
+		
+		System.out.println("=====================================================");
+		System.out.println("=====================================================");
+		
 	}
 	
 }
